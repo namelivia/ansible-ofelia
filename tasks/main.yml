@@ -25,14 +25,14 @@
       awslogs-group: "{{ cloudwatch_log_group }}"
       awslogs-stream: "{{ application_name }}-app"
     volumes:
-      - "{{ hostvars[inventory_hostname].working_directory }}ofelia/etc/ofelia/config.ini"
+      - "{{ hostvars[inventory_hostname].working_directory }}ofelia:/etc/ofelia"
     networks:
       - name: "{{ docker_network_name }}"
 
 - name: Copy ofelia config
   copy:
     src: "{{ ofelia_config_path }}"
-    dest: "{{ hostvars[inventory_hostname].working_directory }}ofelia"
+    dest: "{{ hostvars[inventory_hostname].working_directory }}ofelia/config.ini"
     owner: ubuntu
     group: ubuntu
     mode: '0644'
