@@ -6,6 +6,7 @@
       - docker_network_name is defined
       - cloudwatch_region is defined
       - cloudwatch_log_group is defined
+      - ofelia_config_path is defined
 
 - name: Create the dockernetwork
   docker_network:
@@ -23,5 +24,15 @@
       awslogs-region: "{{ cloudwatch_region }}"
       awslogs-group: "{{ cloudwatch_log_group }}"
       awslogs-stream: "{{ application_name }}-app"
+    volumes:
+      - "{{ hostvars[inventory_hostname].working_directory }}ofelia.ini:/etc/ofelia/config.ini"
     networks:
       - name: "{{ docker_network_name }}"
+
+- name: Copy ofelia config
+  copy:
+    src: "{{ ofelia_config_path }}"
+    dest: "{{ hostvars[inventory_hostname].working_directory }}"
+    owner: ubuntu
+    group: ubuntu
+    mode: '0644'
