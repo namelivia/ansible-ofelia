@@ -30,6 +30,7 @@
     networks:
       - name: "{{ docker_network_name }}"
 
+# TODO: When the config changes the container needs to be restarted manually
 - name: Copy ofelia config
   copy:
     src: "{{ ofelia_config_path }}"
