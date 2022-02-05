@@ -26,6 +26,7 @@
       awslogs-stream: "{{ application_name }}-app"
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}ofelia:/etc/ofelia"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - name: "{{ docker_network_name }}"
 
