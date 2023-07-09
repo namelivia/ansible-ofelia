@@ -30,7 +30,6 @@
     networks:
       - name: "{{ docker_network_name }}"
 
-# TODO: When the config changes the container needs to be restarted manually
 - name: Copy ofelia config
   copy:
     src: "{{ ofelia_config_path }}"
@@ -38,3 +37,8 @@
     owner: ubuntu
     group: ubuntu
     mode: '0644'
+
+# Restart the container so the configuration changes are picked up
+- name: Restart proxy
+  shell: 
+    cmd: docker restart ofelia-app
