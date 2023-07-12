@@ -39,6 +39,6 @@
     mode: '0644'
 
 # Restart the container so the configuration changes are picked up
-- name: Restart proxy
+- name: Restart ofelia
   shell: 
     cmd: docker restart ofelia-app
