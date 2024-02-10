@@ -38,5 +38,6 @@
 
 # Restart the container so the configuration changes are picked up
 - name: Restart ofelia
-  shell: 
-    cmd: docker restart ofelia-app
+  command: docker restart ofelia-app
+  register: restart_ofelia_result
+  changed_when: restart_ofelia_result.rc != 0
